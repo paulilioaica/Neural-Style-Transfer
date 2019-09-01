@@ -19,7 +19,7 @@ content_layers_default = ['conv_4']
 style_layers_default = ['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']
 
 if __name__ == "__main__":
-    print(os.cwd())
+    print(os.getcwd())
     content_image = load_image("./input/content.jpg")
     style_image = load_image("./input/style.jpg")
 
