@@ -20,8 +20,8 @@ style_layers_default = ['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']
 
 if __name__ == "__main__":
     print(os.getcwd())
-    content_image = load_image("./input/content.jpg")
-    style_image = load_image("./input/style.jpg")
+    content_image = load_image("Neural-Style-Transfer/input/content.jpg")
+    style_image = load_image("Neural-Style-Transfer/input/style.jpg")
 
     transform = transforms.Compose([transforms.Resize(IMAGE_SIZE[0], IMAGE_SIZE[1]), transforms.ToTensor(),
                                     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
