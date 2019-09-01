@@ -85,4 +85,4 @@ if __name__ == "__main__":
             os.mkdir('Neural-Style-Transfer/styletransfer/')
 
         if iteration % event == 0:
-            save_image(noise.detach(), filename='./generated/iter_{}.png'.format(iteration))
+            save_image(noise.detach(), filename='Neural-Style-Transfer/styletransfer/iter_{}.png'.format(iteration))
