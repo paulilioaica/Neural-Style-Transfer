@@ -15,6 +15,7 @@ style_weight = 10000
 variation_weight = 1000
 event = 10
 
+device = torch.device('cuda')
 content_layers_default = ['conv_4']
 style_layers_default = ['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']
 
@@ -25,9 +26,9 @@ if __name__ == "__main__":
 
     transform = transforms.Compose([transforms.Resize(IMAGE_SIZE[0], IMAGE_SIZE[1]), transforms.ToTensor(),
                                     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
-    content_image = transform(content_image).unsqueeze(0)
-    style_image = transform(style_image).unsqueeze(0)
-    cnn = VGG().eval()
+    content_image = transform(content_image).unsqueeze(0).to(device)
+    style_image = transform(style_image).unsqueeze(0).to(device)
+    cnn = VGG().to(device).eval()
     for name, child in cnn.vgg.named_children():
         if isinstance(child, nn.MaxPool2d):
             cnn.vgg[int(name)] = nn.AvgPool2d(kernel_size=2, stride=2)
@@ -64,6 +65,7 @@ if __name__ == "__main__":
         for i in range(len(style_features)):
             N, M = noise_style_features[i].shape[0], noise_style_features[i].shape[1]
             style_loss = style_loss + (gram_loss(noise_grams[i], style_grams[i], N, M) / 5.)
+        style_loss = style_loss.to(device)
 
         variation_loss = total_variation_loss(noise)
 
@@ -79,8 +81,8 @@ if __name__ == "__main__":
                                                                                                      style_weight * style_loss.item(),
                                                                                                      variation_weight * variation_loss.item()))
 
-        if not os.path.exists('./styletransfer/'):
-            os.mkdir('./styletransfer/')
+        if not os.path.exists('Neural-Style-Transfer/styletransfer/'):
+            os.mkdir('Neural-Style-Transfer/styletransfer/')
 
         if iteration % event == 0:
             save_image(noise.detach(), filename='./generated/iter_{}.png'.format(iteration))
