@@ -28,6 +28,8 @@ if __name__ == "__main__":
                                     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
     content_image = transform(content_image).unsqueeze(0).to(device)
     style_image = transform(style_image).unsqueeze(0).to(device)
+    print(content_image.shape)
+    print(style_image.shape)
     cnn = VGG().to(device).eval()
     for name, child in cnn.vgg.named_children():
         if isinstance(child, nn.MaxPool2d):
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     style_features = [feature.squeeze().view(feature.shape[1], -1).detach() for feature in
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
-    noise = content_image.clone().detach().requires_grad_(True)
+    noise = torch.randn(1, 3, IMAGE_SIZE[0], IMAGE_SIZE[1], requires_grad=True)
     adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
