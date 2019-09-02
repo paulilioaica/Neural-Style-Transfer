@@ -42,7 +42,7 @@ if __name__ == "__main__":
     style_features = [feature.squeeze().view(feature.shape[1], -1).detach() for feature in
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
-    noise = content_image.clone().requires_grad(True).to(device)
+    noise = content_image.clone().detach().requires_grad_(True).to(device)
     adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
