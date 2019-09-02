@@ -10,9 +10,9 @@ from vgg import VGG
 
 CHANNEL_NUM = 3
 EPOCHS = 1000000
-content_weight = 100
-style_weight = 2000000
-variation_weight = 1000
+content_weight = 10
+style_weight = 200
+variation_weight = 10
 event = 30
 
 device = torch.device('cuda')
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
     noise = content_image.clone().detach().requires_grad_(True).to(device)
-    adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
+    adam = optim.Adam(params=[noise], lr=1, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
     min_total_loss = 999999999999999.0
