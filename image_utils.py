@@ -1,5 +1,5 @@
 from PIL import Image
-IMAGE_SIZE = (1024, 768)
+IMAGE_SIZE = (1024, 1024)
 
 def load_image(path):
     img = Image.open(path)
