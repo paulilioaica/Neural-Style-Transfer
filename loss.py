@@ -7,8 +7,6 @@ def gram(tensor):
 
 
 def gram_loss(g_matrix_style, g_matrix_content, N, M):
-
-
     return torch.sum(torch.pow(g_matrix_content- g_matrix_style, 2)) / (np.power(N * M * 2, 2, dtype=np.float64))
 
 
