@@ -82,4 +82,4 @@ if __name__ == "__main__":
                                                                                                      variation_weight * variation_loss.item()))
 
         if iteration % event == 0:
-            save_image(noise.detach(), filename='/content/gdrive/My\ Drive/StyleTransfer/image_iter{}'.format(iteration))
+            save_image(noise.detach(), filename='/content/gdrive/My\ Drive/StyleTransfer/image_iter{}.png'.format(iteration))
