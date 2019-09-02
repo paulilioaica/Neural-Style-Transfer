@@ -11,7 +11,7 @@ from vgg import VGG
 CHANNEL_NUM = 3
 EPOCHS = 1000000
 content_weight = 1
-style_weight = 1
+style_weight = 5
 variation_weight = 1
 event = 30
 
@@ -81,4 +81,4 @@ if __name__ == "__main__":
                                                                                                      variation_weight * variation_loss.item()))
 
         if iteration % event == 0:
-            save_image(noise.detach(), filename='/content/gdrive/My Drive/StyleTransfer/image_iter{}.png'.format(iteration))
+            save_image(noise.clone(), filename='/content/gdrive/My Drive/StyleTransfer/image_iter{}.png'.format(iteration))
