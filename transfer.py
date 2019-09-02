@@ -7,13 +7,12 @@ from torchvision.utils import save_image
 from loss import *
 from image_utils import load_image, IMAGE_SIZE
 from vgg import VGG
-import copy
 
 CHANNEL_NUM = 3
 EPOCHS = 10000
 content_weight = 10
-style_weight = 10000
-variation_weight = 1000
+style_weight = 1000
+variation_weight = 10
 event = 10
 
 device = torch.device('cuda')
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     style_features = [feature.squeeze().view(feature.shape[1], -1).detach() for feature in
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
-    noise = torch.tensor(copy.deepcopy(content_image), requires_grad=True)
+    noise = content_image.clone().detach().requires_grad_(True)
     adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
