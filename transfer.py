@@ -10,9 +10,9 @@ from vgg import VGG
 
 CHANNEL_NUM = 3
 EPOCHS = 1000000
-content_weight = 1000
-style_weight = 0.01
-variation_weight = 1000
+content_weight = 0.001
+style_weight = 10000
+variation_weight = 100
 event = 30
 
 device = torch.device('cuda')
