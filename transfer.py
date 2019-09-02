@@ -9,11 +9,11 @@ from image_utils import load_image, IMAGE_SIZE
 from vgg import VGG
 
 CHANNEL_NUM = 3
-EPOCHS = 10000
-content_weight = 10
-style_weight = 1000
-variation_weight = 10
-event = 10
+EPOCHS = 1000000
+content_weight = 1
+style_weight = 2
+variation_weight = 1
+event = 30
 
 device = torch.device('cuda')
 content_layers_default = ['conv_4']
