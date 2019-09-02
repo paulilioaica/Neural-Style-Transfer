@@ -81,8 +81,5 @@ if __name__ == "__main__":
                                                                                                      style_weight * style_loss.item(),
                                                                                                      variation_weight * variation_loss.item()))
 
-        if not os.path.exists('Neural-Style-Transfer/styletransfer/'):
-            os.mkdir('Neural-Style-Transfer/styletransfer/')
-
         if iteration % event == 0:
-            save_image(noise.detach(), filename='Neural-Style-Transfer/styletransfer/iter_{}.png'.format(iteration))
+            save_image(noise.detach(), filename='/content/gdrive/My\ Drive/StyleTransfer/image_iter{}'.format(iteration))
