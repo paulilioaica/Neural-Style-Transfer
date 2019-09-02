@@ -80,6 +80,6 @@ if __name__ == "__main__":
                                                                                                      style_weight * style_loss.item(),
                                                                                                      variation_weight * variation_loss.item()))
 
-        if min_total_loss > total_loss.item():
-            min_total_loss = total_loss.item()
+        if min_total_loss > style_loss.item():
+            min_total_loss = style_loss.item()
             save_image(noise.clone(), filename='/content/gdrive/My Drive/StyleTransfer/image_iter{}.png'.format(iteration))
