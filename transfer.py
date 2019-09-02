@@ -11,7 +11,7 @@ from vgg import VGG
 CHANNEL_NUM = 3
 EPOCHS = 1000000
 content_weight = 100
-style_weight = 1e-3
+style_weight = 1
 variation_weight = 10
 event = 30
 
