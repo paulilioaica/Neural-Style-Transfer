@@ -11,7 +11,7 @@ from vgg import VGG
 CHANNEL_NUM = 3
 EPOCHS = 1000000
 content_weight = 100
-style_weight = 20000
+style_weight = 2000000
 variation_weight = 1000
 event = 30
 
@@ -43,10 +43,10 @@ if __name__ == "__main__":
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
     noise = content_image.clone().detach().requires_grad_(True).to(device)
-    adam = optim.Adam(params=[noise], lr=0.1, betas=(0.9, 0.999))
+    adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
-
+    min_total_loss = 999999999999999.0
     for iteration in range(EPOCHS):
 
         adam.zero_grad()
@@ -80,5 +80,6 @@ if __name__ == "__main__":
                                                                                                      style_weight * style_loss.item(),
                                                                                                      variation_weight * variation_loss.item()))
 
-        if iteration % event == 0:
+        if min_total_loss > total_loss.item()
+            min_total_loss = total_loss.item()
             save_image(noise.clone(), filename='/content/gdrive/My Drive/StyleTransfer/image_iter{}.png'.format(iteration))
