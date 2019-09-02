@@ -7,6 +7,7 @@ from torchvision.utils import save_image
 from loss import *
 from image_utils import load_image, IMAGE_SIZE
 from vgg import VGG
+import copy
 
 CHANNEL_NUM = 3
 EPOCHS = 10000
@@ -42,8 +43,7 @@ if __name__ == "__main__":
     style_features = [feature.squeeze().view(feature.shape[1], -1).detach() for feature in
                       cnn.get_style_features(style_image)]
     style_grams = [gram(feature) for feature in style_features]
-
-    noise = torch.randn(1, 3, IMAGE_SIZE[0], IMAGE_SIZE[1], requires_grad=True, device='cuda')
+    noise = copy.deepcopy(content_image)
     adam = optim.Adam(params=[noise], lr=0.01, betas=(0.9, 0.999))
 
     ############## TRAINING LOOP ###############################
