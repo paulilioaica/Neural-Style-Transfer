@@ -1,5 +1,5 @@
 ## Style Transfer 
-### This is a PyTorch implementation of Style Transfer, using a pretrained VGG network
+#### This is a PyTorch implementation of Style Transfer, using a pretrained VGG network
 
 ### ***Input in the network***
 
