@@ -1,4 +1,5 @@
-## Python PyTorch Style Transfer implementation
+## Style Transfer 
+### This is a PyTorch implementation of Style Transfer, using a pretrained VGG network
 
 ### ***Input in the network***
 
@@ -8,6 +9,8 @@
 
 <img src="./input/style.jpg" width="300">
 
+
+##
 
 ### ***After 1 iteration***
 
